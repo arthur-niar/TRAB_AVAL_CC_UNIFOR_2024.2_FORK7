@@ -1,11 +1,11 @@
-let a = "João";
-let b = "Ana";
-let c = "Carlos";
+const nomePessoa1 = "João";
+const nomePessoa2 = "Ana";
+const nomePessoa3 = "Carlos";
 
-function p() {
-    console.log(a);
-    console.log(b);
-    console.log(c);
+function exibirNomes() {
+    console.log(nomePessoa1);
+    console.log(nomePessoa2);
+    console.log(nomePessoa3);
 }
 
-p();
+exibirNomes();

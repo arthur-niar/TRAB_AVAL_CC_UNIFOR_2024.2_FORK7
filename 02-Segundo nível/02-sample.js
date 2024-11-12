@@ -1,8 +1,9 @@
 function verificarSePodeDirigir(idade) {
-    if (idade >= 18) {
-        return 'Pode dirigir';
+    const idadeMinimaParaDirigir = 18;
+    if (idade >= idadeMinimaParaDirigir) {
+        return "Pode dirigir";
     } else {
-        return 'Não pode dirigir';
+        return "Não pode dirigir";
     }
 }
 

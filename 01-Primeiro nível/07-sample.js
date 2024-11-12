@@ -1,8 +1,8 @@
-let strN = "Carlos";
-let intI= 32;
+const nomePessoa = "Carlos";
+const idadePessoa = 32;
 
-function info(strN, intI) {
-    console.log(strN + " tem " + intI + " anos.");
+function exibirInformacao(nome, idade) {
+    console.log(`${nome} tem ${idade} anos.`);
 }
 
-info(strN, intI);
+exibirInformacao(nomePessoa, idadePessoa);

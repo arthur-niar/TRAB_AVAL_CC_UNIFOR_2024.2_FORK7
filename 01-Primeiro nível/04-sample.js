@@ -1,6 +1,8 @@
-let fcr = function(a, b) {
-    return a + b;
-}
+const somarValores = function(valor1, valor2) {
+    return valor1 + valor2;
+};
 
-let rsl = fcr(3, 5);
-console.log(rsl);
+const numero1 = 3;
+const numero2 = 5;
+const resultadoSoma = somarValores(numero1, numero2);
+console.log(resultadoSoma);
