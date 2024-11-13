@@ -1,28 +1,39 @@
 function calcularSalarioFuncionario(horasTrabalhadas, valorHora, cargo) {
     const salarioBase = horasTrabalhadas * valorHora;
 
+    const bonusGerente = 1000;
+    const bonusSupervisor = 500;
+    const bonusPadrao = 200;
+    const descontoPadrao = 300;
+
     let salarioComBonus;
-    if (cargo === 'gerente') {
-        salarioComBonus = salarioBase + 1000;
-    } else if (cargo === 'supervisor') {
-        salarioComBonus = salarioBase + 500;
+    if (cargo === "gerente") {
+        salarioComBonus = salarioBase + bonusGerente;
+    } else if (cargo === "supervisor") {
+        salarioComBonus = salarioBase + bonusSupervisor;
     } else {
-        salarioComBonus = salarioBase + 200;
+        salarioComBonus = salarioBase + bonusPadrao;
     }
 
-    const salarioComDesconto = salarioComBonus - 300;
+    const salarioComDesconto = salarioComBonus - descontoPadrao;
+
+    const limiteImpostoAlto = 5000;
+    const limiteImpostoMedio = 3000;
+    const aliquotaImpostoAlto = 0.27;
+    const aliquotaImpostoMedio = 0.18;
+    const aliquotaImpostoBaixo = 0.11;
 
     let salarioFinal;
-    if (salarioComDesconto > 5000) {
-        salarioFinal = salarioComDesconto - (salarioComDesconto * 0.27);
-    } else if (salarioComDesconto > 3000) {
-        salarioFinal = salarioComDesconto - (salarioComDesconto * 0.18);
+    if (salarioComDesconto > limiteImpostoAlto) {
+        salarioFinal = salarioComDesconto - (salarioComDesconto * aliquotaImpostoAlto);
+    } else if (salarioComDesconto > limiteImpostoMedio) {
+        salarioFinal = salarioComDesconto - (salarioComDesconto * aliquotaImpostoMedio);
     } else {
-        salarioFinal = salarioComDesconto - (salarioComDesconto * 0.11);
+        salarioFinal = salarioComDesconto - (salarioComDesconto * aliquotaImpostoBaixo);
     }
 
     return salarioFinal;
 }
 
-const salario = calcularSalarioFuncionario(160, 25, 'gerente');
+const salario = calcularSalarioFuncionario(160, 25, "gerente");
 console.log(`O salário final é: ${salario}`);

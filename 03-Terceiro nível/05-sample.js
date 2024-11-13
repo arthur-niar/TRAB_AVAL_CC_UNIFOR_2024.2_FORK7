@@ -1,24 +1,29 @@
-async function buscarVeiculosECalcularCusto() {
+async function buscarPersonagemENave(idPersonagem) {
     try {
-        const resposta = await fetch('https://swapi.dev/api/vehicles/');
-        const dados = await resposta.json();
+        const urlBasePersonagem = 'https://swapi.dev/api/people/';
+        const limiteTripulacaoNaveGrande = 100;
 
-        const veiculosCaros = dados.results.filter(veiculo => parseInt(veiculo.cost_in_credits) > 10000);
+        const respostaPersonagem = await fetch(`${urlBasePersonagem}${idPersonagem}/`);
+        const personagem = await respostaPersonagem.json();
 
-        console.log("Veículos caros (mais de 10.000 créditos):");
-        veiculosCaros.forEach(veiculo => {
-            console.log(`- ${veiculo.name}: ${veiculo.cost_in_credits} créditos`);
-        });
+        if (personagem.starships.length > 0) {
+            const urlPrimeiraNave = personagem.starships[0];
+            const respostaNave = await fetch(urlPrimeiraNave);
+            const nave = await respostaNave.json();
 
-        const custoTotal = veiculosCaros.reduce((total, veiculo) => {
-            return total + parseInt(veiculo.cost_in_credits);
-        }, 0);
-
-        console.log(`Custo total dos veículos caros: ${custoTotal} créditos`);
+            const quantidadeTripulacao = parseInt(nave.crew);
+            if (quantidadeTripulacao > limiteTripulacaoNaveGrande) {
+                console.log(`A nave ${nave.name} é considerada grande com ${quantidadeTripulacao} tripulantes.`);
+            } else {
+                console.log(`A nave ${nave.name} é pequena com ${quantidadeTripulacao} tripulantes.`);
+            }
+        } else {
+            console.log(`${personagem.name} não possui naves registradas.`);
+        }
 
     } catch (erro) {
-        console.error('Erro ao buscar veículos:', erro);
+        console.error('Erro ao buscar o personagem ou sua nave:', erro);
     }
 }
 
-buscarVeiculosECalcularCusto();
+buscarPersonagemENave(1);

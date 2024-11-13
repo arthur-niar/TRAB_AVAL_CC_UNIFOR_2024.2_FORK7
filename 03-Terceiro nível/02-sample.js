@@ -1,9 +1,12 @@
 async function buscarEFiltrarPessoas() {
     try {
-        const resposta = await fetch('https://swapi.dev/api/people/');
+        const urlPessoas = 'https://swapi.dev/api/people/';
+        const letraFiltro = 'L';
+
+        const resposta = await fetch(urlPessoas);
         const dados = await resposta.json();
 
-        const pessoasComL = dados.results.filter(pessoa => pessoa.name.startsWith('L'));
+        const pessoasComL = dados.results.filter(pessoa => pessoa.name.startsWith(letraFiltro));
 
         console.log('Pessoas cujo nome começa com L:');
         pessoasComL.forEach(pessoa => {
